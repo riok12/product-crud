@@ -15,7 +15,7 @@ public class CategoryController {
 
     @GetMapping
     public List<CategoryDTO> getAllCategories() {
-        return productService.getAllCategories();
+        return productService.getAllCategoriesWithProducts();
     }
 
     @PostMapping

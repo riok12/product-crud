@@ -12,8 +12,8 @@ public interface ProductService {
     ProductResponse createProduct(ProductDTO productDTO);
     ProductResponse getProductById(Long id);
     void deleteProduct(Long id);
-    List<CategoryDTO> getAllCategories();
     CategoryDTO createCategory(CategoryRequest categoryRequest);
     ProductResponse updateProduct(Long id, ProductDTO productDTO);
+    List<CategoryDTO> getAllCategoriesWithProducts();
 
 }

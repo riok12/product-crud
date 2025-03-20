@@ -2,6 +2,8 @@ package com.example.product_crud.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter@AllArgsConstructor
 @NoArgsConstructor
@@ -10,4 +12,5 @@ import lombok.*;
 public class CategoryDTO {
     private Long id;
     private String name;
+    private List<CategoryProductResponse> products;
 }

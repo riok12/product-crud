@@ -74,16 +74,30 @@ public class ProductServiceImpl implements ProductService {
         return mapToResponse(product);
     }
 
-
     @Override
-    public List<CategoryDTO> getAllCategories() {
-        return categoryRepository.findAll().stream().map(c -> {
-            CategoryDTO dto = new CategoryDTO();
-            dto.setId(c.getId());
-            dto.setName(c.getName());
-            return dto;
+    public List<CategoryDTO> getAllCategoriesWithProducts() {
+        List<Category> categories = categoryRepository.findAll();
+
+        return categories.stream().map(category -> {
+            CategoryDTO categoryDTO = new CategoryDTO();
+            categoryDTO.setId(category.getId());
+            categoryDTO.setName(category.getName());
+
+            List<CategoryProductResponse> productResponses = category.getProducts().stream().map(product -> {
+                CategoryProductResponse productResponse = new CategoryProductResponse();
+                productResponse.setId(product.getId());
+                productResponse.setCode(product.getCode());
+                productResponse.setName(product.getName());
+                productResponse.setPrice(product.getPrice());
+                productResponse.setCategoryId(category.getId());
+                return productResponse;
+            }).collect(Collectors.toList());
+
+            categoryDTO.setProducts(productResponses);
+            return categoryDTO;
         }).collect(Collectors.toList());
     }
+
 
     @Override
     public CategoryDTO createCategory(CategoryRequest categoryRequest) {

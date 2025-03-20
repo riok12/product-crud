@@ -2,12 +2,14 @@ package com.example.product_crud.controller;
 
 import com.example.product_crud.dto.ProductDTO;
 import com.example.product_crud.dto.ProductResponse;
-import com.example.product_crud.model.Product;
 import com.example.product_crud.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
@@ -30,8 +32,11 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public Map<String, String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Product deleted successfully");
+        return response;
     }
 
     @PutMapping("/{id}")
